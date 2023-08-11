@@ -1,0 +1,19 @@
+---
+
+#TODO Uncomment if using a DB
+# DB_HOST: api-go-template-ecs.app.internal
+# DB_NAME: api_go_template
+# DB_USER: api_go_template
+# The password be encrypted in secrets.sops.yml
+# DB_PASSWORD: api_go_template
+
+LOGS_APP_LEVEL: error
+LOG_HTTP_BODIES: false
+
+# TODO Uncomment and change name to match service name
+#NEW_RELIC_APP_NAME: smartshop-services-prd-api-smart-rescan
+#NEW_RELIC_LABEL_ROLE: api_smart_rescan
+
+NEW_RELIC_ENABLED: true
+NEW_RELIC_LABEL_ENV: prd
+NEW_RELIC_LABEL_ACCOUNT: smartshop-services-prd

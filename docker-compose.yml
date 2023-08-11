@@ -1,0 +1,47 @@
+---
+
+version: "3.7"
+
+networks:
+  smartshop_services:
+
+services:
+  api_go_template:
+    image: api_go_template
+    networks:
+      smartshop_services:
+        aliases:
+          - api-go-template-ecs.app.internal
+#TODO Uncomment if you have a database
+#    environment:
+#      DB_HOST: api-go-template-ecs.app.internal
+#      DB_NAME: api_go_template
+#      DB_PASSWORD: api_go_template
+#      DB_USER: api_go_template
+#    depends_on:
+#      - api_go_template_migrations
+#      - api_go_template_postgres
+#
+#  api_go_template_migrations:
+#    command: ./docker-entrypoint-migrations.sh
+#    image: api_go_template
+#    environment:
+#      DB_HOST: api-go-template-ecs.app.internal
+#      DB_NAME: api_go_template
+#      DB_PASSWORD: api_go_template
+#      DB_USER: api_go_template
+#    networks:
+#      - smartshop_services
+#    depends_on:
+#      - api_go_template_postgres
+#
+#  api_go_template_postgres:
+#    image: postgres:11
+#    networks:
+#      smartshop_services:
+#        aliases:
+#          - api-go-template-postgres.db.internal
+#    restart: always
+#    environment:
+#      POSTGRES_USER: api_go_template
+#      POSTGRES_PASSWORD: api_go_template

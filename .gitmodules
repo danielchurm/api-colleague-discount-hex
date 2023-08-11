@@ -1,0 +1,3 @@
+[submodule "smartshop-services-tools"]
+	path = smartshop-services-tools
+	url = git@github.com:JSainsburyPLC/smartshop-services-tools.git

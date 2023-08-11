@@ -1,0 +1,8 @@
+---
+
+environment_tags:
+  - container-dev
+#TODO Uncomment as needed
+#  - container-stg
+#  - container-prd
+name: api-go-template

@@ -1,0 +1,18 @@
+# Don't include local dev and devops tooling
+.git*
+.idea
+.venv*
+docker-compose.yml
+docker-compose.local.yml
+Dockerfile
+migrate
+README.md
+vendor
+
+# Don't include any environment vars
+deployment/vars/**/*
+
+# Take only what we need from the tools repo
+smartshop-services-tools/**/*
+!smartshop-services-tools/docker/Makefile
+!smartshop-services-tools/bin/wait-for-postgres.sh
