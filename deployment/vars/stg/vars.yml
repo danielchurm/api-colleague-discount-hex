@@ -1,12 +1,5 @@
 ---
 
-#TODO Uncomment if using a DB
-# DB_HOST: api-go-template-ecs.app.internal
-# DB_NAME: api_go_template
-# DB_USER: api_go_template
-# The password be encrypted in secrets.sops.yml
-# DB_PASSWORD: api_go_template
-
 LOGS_APP_LEVEL: error
 LOG_HTTP_BODIES: false
 

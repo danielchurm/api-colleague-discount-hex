@@ -25,7 +25,7 @@ func main() {
 
 	enableNewRelic(err, cfg)
 
-	a := app.NewApplication(chi.NewRouter(), nil, apiproblem.NewFactory(errorType))
+	a := app.NewApplication(chi.NewRouter(), apiproblem.NewFactory(errorType))
 
 	a.Init()
 	a.Run(cfg.Port, cfg.Logger.LogHttpBodies)

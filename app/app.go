@@ -1,7 +1,6 @@
 package app
 
 import (
-	"database/sql"
 	"fmt"
 	"net/http"
 	"os"
@@ -20,12 +19,11 @@ import (
 
 type App struct {
 	r              chi.Router
-	db             *sql.DB
 	problemFactory apiproblem.Factory
 }
 
-func NewApplication(r chi.Router, db *sql.DB, problemFactory apiproblem.Factory) App {
-	return App{r, db, problemFactory}
+func NewApplication(r chi.Router, problemFactory apiproblem.Factory) App {
+	return App{r, problemFactory}
 }
 
 func (a *App) Init() {

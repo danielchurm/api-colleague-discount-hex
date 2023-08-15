@@ -7,8 +7,3 @@ services:
     ports:
       # change external port to include NEXT unique value from here https://github.com/JSainsburyPLC/smartshop-backend
       - "8080:8080"
-
-#  api_go_template_postgres:
-#    ports:
-#     # change external port to include NEXT unique value from here https://github.com/JSainsburyPLC/smartshop-backend
-#      - "5432:5432"

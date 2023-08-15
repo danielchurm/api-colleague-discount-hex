@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/DATA-DOG/go-sqlmock"
 	apiproblem "github.com/JSainsburyPLC/go-api-problem"
 	"github.com/go-chi/chi/v5"
 
@@ -31,9 +30,8 @@ var _ = Describe("App", func() {
 		Context("When the service is healthy", func() {
 			It("reports no errors", func() {
 				router := chi.NewRouter()
-				mockDb, _, _ := sqlmock.New()
 
-				a := app.NewApplication(router, mockDb, apiproblem.NewFactory("http://error.type/"))
+				a := app.NewApplication(router, apiproblem.NewFactory("http://error.type/"))
 				a.Init()
 
 				req, _ := http.NewRequest(http.MethodGet, "/healthcheck", nil)
@@ -53,9 +51,8 @@ var _ = Describe("App", func() {
 		Context("When A resource cannot be found", func() {
 			It("inform the consumer of it not being found", func() {
 				router := chi.NewRouter()
-				mockDb, _, _ := sqlmock.New()
 
-				a := app.NewApplication(router, mockDb, apiproblem.NewFactory("http://error.type/"))
+				a := app.NewApplication(router, apiproblem.NewFactory("http://error.type/"))
 				a.Init()
 
 				req, _ := http.NewRequest(http.MethodGet, "/will/never/exist", nil)
