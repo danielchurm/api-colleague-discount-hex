@@ -6,7 +6,7 @@ import (
 
 	log "github.com/JSainsburyPLC/go-logrus-wrapper"
 
-	"github.com/JSainsburyPLC/smartshop-api-go-template/healthcheck"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/healthcheck"
 )
 
 type HealthCheckHandler struct {

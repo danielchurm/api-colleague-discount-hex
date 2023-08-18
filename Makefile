@@ -5,7 +5,7 @@ DOCKER_TEST_INCLUDE_RUNTIME=1
 -include smartshop-services-tools/docker/Makefile
 
 ## TODO: Need to define unique SERVICE_NAME (used for docker images etc.)
-SERVICE_NAME?=api_go_template
+SERVICE_NAME?=api_colleague_discount
 
 PATH:=$(PWD)/bin:${PATH}:${HOME}/go/bin:/usr/local/bin
 export PATH
@@ -24,10 +24,10 @@ MIGRATE_VERSION?=v4.15.2
 
 MOCKGEN_VERSION?=v1.6.0
 
-DB_USER?=api_go_template
-DB_NAME?=api_go_template
+DB_USER?=api_colleague_discount
+DB_NAME?=api_colleague_discount
 DB_PASSWORD?=password
-DB_HOST?=api-go-template-postgres.db.internal
+DB_HOST?=api-colleague-discount-postgres.db.internal
 DB_PORT?=5432
 DB_SSL_MODE?=disable
 DB_TYPE?=postgres
@@ -103,4 +103,19 @@ ci_test:
 
 .PHONY: run
 run:
+	SAINSBURYS_COLLEAGUE_DISCOUNT_SERVICE_HOST=localhost:1080 \
+	ORCHESTRATOR_HOST=localhost:1081 \
+	ORCHESTRATOR_API_KEY=the-orchestrator-api-key \
 	go run main.go
+
+up_mock_services:
+	docker compose -f docker-compose.yml -f docker-compose.local.yml up -d sainsburys_colleague_discount_mock_server
+	docker compose -f docker-compose.yml -f docker-compose.local.yml up -d identity_orchestrator_mock_server
+
+down_mock_services:
+	docker compose down
+
+e2e_test:
+	go clean -testcache
+	API_COLLEAGUE_DISCOUNT_HOST="http://localhost:8080" \
+	go test -timeout=30s -cover -race -v ./e2e/

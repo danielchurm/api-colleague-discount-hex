@@ -10,7 +10,7 @@ import (
 var _ = Describe("Health Checks", func() {
 	Context("Test healthy service", func() {
 		It("reports that the service is healthy", func() {
-			resp, err := http.Get("http://api-go-template-ecs.app.internal:8080/healthcheck")
+			resp, err := http.Get(cfg.ApiColleagueDiscountHost + "/healthcheck")
 
 			Expect(err).To(BeNil())
 			Expect(resp).ToNot(BeNil())

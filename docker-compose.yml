@@ -6,9 +6,29 @@ networks:
   smartshop_services:
 
 services:
-  api_go_template:
-    image: api_go_template
+  api_colleague_discount:
+    image: api_colleague_discount
     networks:
       smartshop_services:
         aliases:
-          - api-go-template-ecs.app.internal
+          - api-colleague-discount-ecs.app.internal
+
+  sainsburys_colleague_discount_mock_server:
+    image: thiht/smocker:0.18.2
+    environment:
+      SMOCKER_MOCK_SERVER_LISTEN_PORT: 1080
+      SMOCKER_CONFIG_LISTEN_PORT: 2080
+    networks:
+      smartshop_services:
+        aliases:
+          - sainsburys-colleague-discount-mock-server.app.internal
+
+  identity_orchestrator_mock_server:
+    image: thiht/smocker:0.18.2
+    environment:
+      SMOCKER_MOCK_SERVER_LISTEN_PORT: 1081
+      SMOCKER_CONFIG_LISTEN_PORT: 2081
+    networks:
+      smartshop_services:
+        aliases:
+          - smartshop-api-identity-orchestrator-mock-server.app.internal

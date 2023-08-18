@@ -7,7 +7,7 @@ import (
 
 	apiproblem "github.com/JSainsburyPLC/go-api-problem"
 
-	"github.com/JSainsburyPLC/smartshop-api-go-template/handlers"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/handlers"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )

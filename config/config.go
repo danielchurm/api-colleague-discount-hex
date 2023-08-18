@@ -23,17 +23,6 @@ type NewRelicConfig struct {
 	LabelRole        string `env:"NEW_RELIC_LABEL_ROLE" envDefault:""`
 }
 
-type DatabaseConfig struct {
-	User           string `env:"DB_USER" envDefault:"api_go_template"`
-	Name           string `env:"DB_NAME" envDefault:"api_go_template"`
-	Password       string `env:"DB_PASSWORD" envDefault:"password"`
-	Host           string `env:"DB_HOST" envDefault:"localhost"`
-	Port           int    `env:"DB_PORT" envDefault:"5432"`
-	SSLMode        string `env:"DB_SSL_MODE" envDefault:"disable"`
-	Type           string `env:"DB_TYPE" envDefault:"postgres"`
-	TimeoutSeconds int    `env:"DB_TIMEOUT_SECONDS" envDefault:"10"`
-}
-
 func NewAppConfig() (AppConfig, error) {
 	cfg := &AppConfig{}
 	if err := env.Parse(cfg); err != nil {

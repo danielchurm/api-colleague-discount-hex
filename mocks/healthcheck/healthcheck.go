@@ -7,7 +7,7 @@ package mock_healthcheck
 import (
 	reflect "reflect"
 
-	healthcheck "github.com/JSainsburyPLC/smartshop-api-go-template/healthcheck"
+	healthcheck "github.com/JSainsburyPLC/smartshop-api-colleague-discount/healthcheck"
 	gomock "github.com/golang/mock/gomock"
 )
 

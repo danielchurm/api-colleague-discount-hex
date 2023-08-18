@@ -6,13 +6,13 @@ import (
 	nrw "github.com/JSainsburyPLC/go-newrelic-wrapper"
 	"github.com/go-chi/chi/v5"
 
-	"github.com/JSainsburyPLC/smartshop-api-go-template/app"
-	"github.com/JSainsburyPLC/smartshop-api-go-template/config"
-	//TODO Uncomment if you have a database "github.com/JSainsburyPLC/smartshop-api-go-template/db"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/app"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/config"
+	//TODO Uncomment if you have a database "github.com/JSainsburyPLC/smartshop-api-colleague-discount/db"
 )
 
 const (
-	errorType = "https://github.com/JSainsburyPLC/smartshop-api-go-template/blob/develop/README_TEMPLATE.md#Error-Codes"
+	errorType = "https://github.com/JSainsburyPLC/smartshop-api-colleague-discount/blob/develop/README_TEMPLATE.md#Error-Codes"
 )
 
 func main() {

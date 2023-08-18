@@ -13,8 +13,8 @@ import (
 	accesslogger "github.com/JSainsburyPLC/smartshop-go-access-logger"
 	"github.com/go-chi/chi/v5"
 
-	"github.com/JSainsburyPLC/smartshop-api-go-template/handlers"
-	"github.com/JSainsburyPLC/smartshop-api-go-template/healthcheck"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/handlers"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/healthcheck"
 )
 
 type App struct {

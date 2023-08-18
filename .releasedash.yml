@@ -5,4 +5,4 @@ environment_tags:
 #TODO Uncomment as needed
 #  - container-stg
 #  - container-prd
-name: api-go-template
+name: api-colleague-discount

@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/JSainsburyPLC/smartshop-api-go-template/handlers"
-	"github.com/JSainsburyPLC/smartshop-api-go-template/healthcheck"
-	mock_healthcheck "github.com/JSainsburyPLC/smartshop-api-go-template/mocks/healthcheck"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/handlers"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/healthcheck"
+	mock_healthcheck "github.com/JSainsburyPLC/smartshop-api-colleague-discount/mocks/healthcheck"
 
 	"github.com/golang/mock/gomock"
 

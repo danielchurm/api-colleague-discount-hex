@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/JSainsburyPLC/smartshop-api-go-template/config"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/config"
 )
 
 var _ = Describe("Configuration", func() {
@@ -87,7 +87,7 @@ var _ = Describe("Configuration", func() {
 				os.Setenv("NEW_RELIC_ENABLED", "true")
 				os.Setenv("NEW_RELIC_LABEL_ENV", "tst")
 				os.Setenv("NEW_RELIC_LABEL_ACCOUNT", "smartshop-services-pre")
-				os.Setenv("NEW_RELIC_LABEL_ROLE", "api_go_template")
+				os.Setenv("NEW_RELIC_LABEL_ROLE", "api_colleague_discount")
 
 				defer os.Setenv("NEW_RELIC_APP_NAME", currentNewRelicAppName)
 				defer os.Setenv("NEW_RELIC_LICENCE_KEY", currentNewRelicLicenceKey)
@@ -106,7 +106,7 @@ var _ = Describe("Configuration", func() {
 				Expect(appConfig.NewRelic.Enabled).To(Equal(true))
 				Expect(appConfig.NewRelic.LabelEnvironment).To(Equal("tst"))
 				Expect(appConfig.NewRelic.LabelAccount).To(Equal("smartshop-services-pre"))
-				Expect(appConfig.NewRelic.LabelRole).To(Equal("api_go_template"))
+				Expect(appConfig.NewRelic.LabelRole).To(Equal("api_colleague_discount"))
 			})
 		})
 	})

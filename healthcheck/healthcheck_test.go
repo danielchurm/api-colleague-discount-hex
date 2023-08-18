@@ -1,7 +1,7 @@
 package healthcheck_test
 
 import (
-	"github.com/JSainsburyPLC/smartshop-api-go-template/healthcheck"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/healthcheck"
 	"github.com/golang/mock/gomock"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"

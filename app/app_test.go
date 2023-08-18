@@ -12,7 +12,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/JSainsburyPLC/smartshop-api-go-template/app"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/app"
 )
 
 var (

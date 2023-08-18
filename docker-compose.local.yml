@@ -3,7 +3,16 @@
 version: "3.7"
 
 services:
-  api_go_template:
+  api_colleague_discount:
     ports:
-      # change external port to include NEXT unique value from here https://github.com/JSainsburyPLC/smartshop-backend
-      - "8080:8080"
+      - "8039:8080"
+
+  sainsburys_colleague_discount_mock_server:
+    ports:
+      - "1080:1080"
+      - "2080:2080"
+
+  identity_orchestrator_mock_server:
+    ports:
+      - "1081:1081"
+      - "2081:2081"

@@ -1,9 +1,8 @@
-module github.com/JSainsburyPLC/smartshop-api-go-template
+module github.com/JSainsburyPLC/smartshop-api-colleague-discount
 
 go 1.20
 
 require (
-	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/JSainsburyPLC/go-api-problem v1.2.1
 	github.com/JSainsburyPLC/go-logrus-wrapper v1.3.1
 	github.com/JSainsburyPLC/go-newrelic-wrapper v1.8.0
@@ -11,7 +10,6 @@ require (
 	github.com/caarlos0/env/v6 v6.10.1
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/golang/mock v1.6.0
-	github.com/lib/pq v1.10.7
 	github.com/onsi/ginkgo/v2 v2.5.1
 	github.com/onsi/gomega v1.24.1
 )

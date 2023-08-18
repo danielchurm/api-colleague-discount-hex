@@ -1,4 +1,4 @@
-# smartshop-api-go-template
+# smartshop-api-colleague-discount
 
 SmartShop template for api micro-services that are written in golang.
 This is provided as an exemplar for consistency and as a quick start for new golang micro-services.
@@ -10,10 +10,10 @@ This is provided as an exemplar for consistency and as a quick start for new gol
 
 ## How to set up a new service
 
-### 1) Use GitHub to copy smartshop-api-go-template to the new service repo:
+### 1) Use GitHub to copy smartshop-api-colleague-discount to the new service repo:
 
 * Open https://github.com/JSainsburyPLC and click on 'New'
-* Click on 'No Template' and select smartshop-api-go-template
+* Click on 'No Template' and select smartshop-api-colleague-discount
 * Enter new service repo name 'Repository name'
 * Fill in 'Description'
 * Tick 'Private'
@@ -35,7 +35,7 @@ https://sainsburys-confluence.valiantys.net/display/ISSA/Docker+Services
     * Go to the GoCD pipelines and search for 'infra_ecr' and run 'infra_ecr.deploy.mgt' to pick up these changes
 
 * Dashboard
-    * Edit the .releasedash.yml in this repo and replace the text 'smartshop-api-go-template' with your new repo name
+    * Edit the .releasedash.yml in this repo and replace the text 'smartshop-api-colleague-discount' with your new repo name
       using dashes
 
 * ECS deployment config
@@ -54,8 +54,8 @@ instructions [here](https://github.com/JSainsburyPLC/smartshop-services-tools#en
 
 ### 5) Update imports and tests to reflect your new repo name
 
-* Replace the text 'api-go-template' with your new repo name using dashes
-* Replace the text 'api_go_template' with your new repo name using underscores
+* Replace the text 'api-colleague-discount' with your new repo name using dashes
+* Replace the text 'api_colleague_discount' with your new repo name using underscores
 
 ### 6) Edit go.mod
 
@@ -155,7 +155,7 @@ $ make run
 
 In a separate window:
 
-- Run integration tests (note: add smartshop-api-go-template-ecs.app.internal to /etc/hosts next to localhost )
+- Run integration tests (note: add smartshop-api-colleague-discount-ecs.app.internal to /etc/hosts next to localhost )
 
 ```BASH
 $ make ci_test
@@ -181,7 +181,7 @@ endpoints
 ```BASH
 $ docker ps
 $ docker exec -it <CONTAINER ID> /bin/bash
-root@<CONTAINER ID>:/smartshop# curl http://api-go-template.app.internal:8080/healthcheck
+root@<CONTAINER ID>:/smartshop# curl http://api-colleague-discount.app.internal:8080/healthcheck
 ```
 
 #### Run the tests (including integration tests)
@@ -210,5 +210,5 @@ $ export PATH=$PATH:/usr/local/bin:/usr/local/opt/libpq/bin
 #### Using psql
 
 ```BASH
-$ psql -h localhost -p 5432 -U smartshop_api_go_template
+$ psql -h localhost -p 5432 -U smartshop_api_colleague_discount
 ```
