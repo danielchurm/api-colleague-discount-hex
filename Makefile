@@ -118,4 +118,6 @@ down_mock_services:
 e2e_test:
 	go clean -testcache
 	API_COLLEAGUE_DISCOUNT_HOST="http://localhost:8080" \
+	COLLEAGUE_DISCOUNT_MOCK_ADMIN_HOST="http://localhost:2080" \
+	SMARTSHOP_ORCHESTRATOR_MOCK_HOST="http://localhost:2081" \
 	go test -timeout=30s -cover -race -v ./e2e/
