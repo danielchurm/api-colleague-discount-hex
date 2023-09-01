@@ -52,6 +52,10 @@ func (s Server) createRouter(logHttpBodies bool) http.Handler {
 	router.Get("/healthcheck", healthcheckHandler)
 
 	apiProblemFactory := apiproblem.NewFactory(errorType)
+
+	getCardHandler := http_handlers.NewGetCardHandler(apiProblemFactory, nil)
+	router.Get("/discount-card", getCardHandler.ServeHTTP)
+
 	notFounderHandler := http_handlers.NewNotFound(apiProblemFactory).ServeHTTP
 	router.NotFound(notFounderHandler)
 
