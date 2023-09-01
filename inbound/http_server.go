@@ -11,6 +11,7 @@ import (
 	"github.com/JSainsburyPLC/go-logrus-wrapper/middleware"
 	nrw "github.com/JSainsburyPLC/go-newrelic-wrapper"
 	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/config"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/domain"
 	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/inbound/http_handlers"
 	accesslogger "github.com/JSainsburyPLC/smartshop-go-access-logger"
 	"github.com/go-chi/chi/v5"
@@ -23,6 +24,7 @@ const (
 type Server struct {
 	Config            config.AppConfig
 	ApiProblemFactory apiproblem.Factory
+	DiscountCard      domain.DiscountCardRetriever
 }
 
 func (s Server) ListenAndServe() error {
@@ -53,7 +55,7 @@ func (s Server) createRouter(logHttpBodies bool) http.Handler {
 
 	apiProblemFactory := apiproblem.NewFactory(errorType)
 
-	getCardHandler := http_handlers.NewGetCardHandler(apiProblemFactory, nil)
+	getCardHandler := http_handlers.NewGetCardHandler(apiProblemFactory, s.DiscountCard)
 	router.Get("/discount-card", getCardHandler.ServeHTTP)
 
 	notFounderHandler := http_handlers.NewNotFound(apiProblemFactory).ServeHTTP
