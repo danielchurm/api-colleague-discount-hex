@@ -1,6 +1,7 @@
 package http_handlers
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"net/http"
@@ -12,7 +13,7 @@ import (
 
 //go:generate mockgen -destination=../../mocks/inbound/http_handlers/get_card.go -source=get_card.go
 type ColleagueDiscountCardRetriever interface {
-	GetCardForUser(userId int) (domain.Card, error)
+	GetCardForUser(ctx context.Context, userId int) (domain.Card, error)
 }
 
 type getCardResponse struct {
@@ -46,7 +47,7 @@ func (g GetCardHandler) ServeHTTP(writer http.ResponseWriter, request *http.Requ
 		return
 	}
 
-	cardForUser, _ := g.colleagueDiscountCardRetriever.GetCardForUser(userId)
+	cardForUser, _ := g.colleagueDiscountCardRetriever.GetCardForUser(request.Context(), userId)
 
 	resp := getCardResponse{
 		CardNumber:  cardForUser.CardNumber,

@@ -5,6 +5,7 @@
 package mock_http_handlers
 
 import (
+	context "context"
 	reflect "reflect"
 
 	domain "github.com/JSainsburyPLC/smartshop-api-colleague-discount/domain"
@@ -35,16 +36,16 @@ func (m *MockColleagueDiscountCardRetriever) EXPECT() *MockColleagueDiscountCard
 }
 
 // GetCardForUser mocks base method.
-func (m *MockColleagueDiscountCardRetriever) GetCardForUser(userId int) (domain.Card, error) {
+func (m *MockColleagueDiscountCardRetriever) GetCardForUser(ctx context.Context, userId int) (domain.Card, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetCardForUser", userId)
+	ret := m.ctrl.Call(m, "GetCardForUser", ctx, userId)
 	ret0, _ := ret[0].(domain.Card)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetCardForUser indicates an expected call of GetCardForUser.
-func (mr *MockColleagueDiscountCardRetrieverMockRecorder) GetCardForUser(userId interface{}) *gomock.Call {
+func (mr *MockColleagueDiscountCardRetrieverMockRecorder) GetCardForUser(ctx, userId interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCardForUser", reflect.TypeOf((*MockColleagueDiscountCardRetriever)(nil).GetCardForUser), userId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCardForUser", reflect.TypeOf((*MockColleagueDiscountCardRetriever)(nil).GetCardForUser), ctx, userId)
 }

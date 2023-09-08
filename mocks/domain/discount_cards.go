@@ -5,6 +5,7 @@
 package mock_domain
 
 import (
+	context "context"
 	reflect "reflect"
 
 	domain "github.com/JSainsburyPLC/smartshop-api-colleague-discount/domain"
@@ -35,18 +36,18 @@ func (m *MockUserRepository) EXPECT() *MockUserRepositoryMockRecorder {
 }
 
 // GetEmail mocks base method.
-func (m *MockUserRepository) GetEmail(userId int) (string, error) {
+func (m *MockUserRepository) GetEmail(ctx context.Context, userId int) (string, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetEmail", userId)
+	ret := m.ctrl.Call(m, "GetEmail", ctx, userId)
 	ret0, _ := ret[0].(string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetEmail indicates an expected call of GetEmail.
-func (mr *MockUserRepositoryMockRecorder) GetEmail(userId interface{}) *gomock.Call {
+func (mr *MockUserRepositoryMockRecorder) GetEmail(ctx, userId interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEmail", reflect.TypeOf((*MockUserRepository)(nil).GetEmail), userId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEmail", reflect.TypeOf((*MockUserRepository)(nil).GetEmail), ctx, userId)
 }
 
 // MockDiscountCardRepository is a mock of DiscountCardRepository interface.
@@ -73,16 +74,16 @@ func (m *MockDiscountCardRepository) EXPECT() *MockDiscountCardRepositoryMockRec
 }
 
 // GetDiscountCard mocks base method.
-func (m *MockDiscountCardRepository) GetDiscountCard(email string) (domain.Card, error) {
+func (m *MockDiscountCardRepository) GetDiscountCard(ctx context.Context, email string) (domain.Card, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetDiscountCard", email)
+	ret := m.ctrl.Call(m, "GetDiscountCard", ctx, email)
 	ret0, _ := ret[0].(domain.Card)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetDiscountCard indicates an expected call of GetDiscountCard.
-func (mr *MockDiscountCardRepositoryMockRecorder) GetDiscountCard(email interface{}) *gomock.Call {
+func (mr *MockDiscountCardRepositoryMockRecorder) GetDiscountCard(ctx, email interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDiscountCard", reflect.TypeOf((*MockDiscountCardRepository)(nil).GetDiscountCard), email)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDiscountCard", reflect.TypeOf((*MockDiscountCardRepository)(nil).GetDiscountCard), ctx, email)
 }

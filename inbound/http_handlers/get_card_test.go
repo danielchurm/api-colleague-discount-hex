@@ -42,7 +42,7 @@ var _ = Describe("get card handler", func() {
 		response := httptest.NewRecorder()
 
 		mockColleagueDiscountCardRetriever.EXPECT().
-			GetCardForUser(userId).
+			GetCardForUser(request.Context(), userId).
 			Return(usersCard, nil)
 
 		handler := http_handlers.NewGetCardHandler(apiProblemFactory, mockColleagueDiscountCardRetriever)

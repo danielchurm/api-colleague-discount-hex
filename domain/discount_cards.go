@@ -1,5 +1,7 @@
 package domain
 
+import "context"
+
 type Card struct {
 	CardNumber  string
 	IssueNumber int
@@ -9,11 +11,11 @@ type Card struct {
 //go:generate mockgen -destination=../mocks/domain/discount_cards.go -source=discount_cards.go
 
 type UserRepository interface {
-	GetEmail(userId int) (string, error)
+	GetEmail(ctx context.Context, userId int) (string, error)
 }
 
 type DiscountCardRepository interface {
-	GetDiscountCard(email string) (Card, error)
+	GetDiscountCard(ctx context.Context, email string) (Card, error)
 }
 
 type DiscountCardRetriever struct {
@@ -28,13 +30,13 @@ func NewDiscountCard(userRepository UserRepository, discountCardRepository Disco
 	}
 }
 
-func (dc DiscountCardRetriever) GetCardForUser(userId int) (Card, error) {
-	email, err := dc.userRepo.GetEmail(userId)
+func (dc DiscountCardRetriever) GetCardForUser(ctx context.Context, userId int) (Card, error) {
+	email, err := dc.userRepo.GetEmail(ctx, userId)
 	if err != nil {
 		return Card{}, err
 	}
 
-	discountCard, err := dc.discountCardRepo.GetDiscountCard(email)
+	discountCard, err := dc.discountCardRepo.GetDiscountCard(ctx, email)
 	if err != nil {
 		return Card{}, err
 	}

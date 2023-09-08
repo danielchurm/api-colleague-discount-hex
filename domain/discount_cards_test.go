@@ -1,6 +1,7 @@
 package domain_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/domain"
@@ -23,6 +24,7 @@ var _ = Describe("discount cards", func() {
 		mockDiscountCardRepo *mock_domain.MockDiscountCardRepository
 
 		discountCardRetriever domain.DiscountCardRetriever
+		ctx                   context.Context
 	)
 
 	BeforeEach(func() {
@@ -31,6 +33,7 @@ var _ = Describe("discount cards", func() {
 		mockDiscountCardRepo = mock_domain.NewMockDiscountCardRepository(ctrl)
 
 		discountCardRetriever = domain.NewDiscountCard(mockUserRepo, mockDiscountCardRepo)
+		ctx = context.Background()
 	})
 
 	It("returns the user's discount card", func() {
@@ -42,10 +45,10 @@ var _ = Describe("discount cards", func() {
 			Status:      "VERIFIED",
 		}
 
-		mockUserRepo.EXPECT().GetEmail(userId).Return(email, nil)
-		mockDiscountCardRepo.EXPECT().GetDiscountCard(email).Return(expectedCard, nil)
+		mockUserRepo.EXPECT().GetEmail(ctx, userId).Return(email, nil)
+		mockDiscountCardRepo.EXPECT().GetDiscountCard(ctx, email).Return(expectedCard, nil)
 
-		card, err := discountCardRetriever.GetCardForUser(userId)
+		card, err := discountCardRetriever.GetCardForUser(ctx, userId)
 
 		Expect(err).ToNot(HaveOccurred())
 		Expect(card).To(Equal(expectedCard))
