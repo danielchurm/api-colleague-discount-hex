@@ -1,12 +1,12 @@
 package outbound_test
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
-	"testing"
 
 	log "github.com/JSainsburyPLC/go-logrus-wrapper"
 	mock_outbound "github.com/JSainsburyPLC/smartshop-api-colleague-discount/mocks/outbound"
@@ -15,11 +15,6 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
-
-func TestOutboundSuite(t *testing.T) {
-	RegisterFailHandler(Fail)
-	RunSpecs(t, "Outbound Test Suite")
-}
 
 var _ = Describe("identity orchestrator client", func() {
 	var (
@@ -67,7 +62,7 @@ var _ = Describe("identity orchestrator client", func() {
 		}`
 
 		responseRecorder := httptest.NewRecorder()
-		responseRecorder.Write([]byte(respBody))
+		responseRecorder.Body = bytes.NewBufferString(respBody)
 		resp := responseRecorder.Result()
 		reqMatcher := identityOrchReqMatcher{
 			host:   host,
