@@ -103,9 +103,9 @@ ci_test:
 
 .PHONY: run
 run:
-	SAINSBURYS_COLLEAGUE_DISCOUNT_SERVICE_HOST=localhost:1080 \
-	ORCHESTRATOR_HOST=localhost:1081 \
-	ORCHESTRATOR_API_KEY=the-orchestrator-api-key \
+	CHECKOUTS_COLLEAGUE_DISCOUNT_HOST=localhost:1080 \
+	IDENTITY_ORCHESTRATOR_HOST=localhost:1081 \
+	IDENTITY_ORCHESTRATOR_API_KEY=the-orchestrator-api-key \
 	go run main.go
 
 up_mock_services:

@@ -3,10 +3,22 @@ package config
 import "github.com/caarlos0/env/v6"
 
 type AppConfig struct {
-	Port      string `env:"PORT" envDefault:"8080"`
-	ErrorType string `env:"ERROR_TYPE_URL"`
-	Logger    LoggerConfig
-	NewRelic  NewRelicConfig
+	Port                             string `env:"PORT" envDefault:"8080"`
+	ErrorType                        string `env:"ERROR_TYPE_URL"`
+	IdentityOrchestratorConfig       IdentityOrchestratorConfig
+	CheckoutsColleagueDiscountConfig CheckoutsColleagueDiscountConfig
+	Logger                           LoggerConfig
+	NewRelic                         NewRelicConfig
+}
+
+type IdentityOrchestratorConfig struct {
+	Host   string `env:"IDENTITY_ORCHESTRATOR_HOST" envDefault:"smartshop-api-identity-orchestrator-mock-server.app.internal"`
+	ApiKey string `env:"IDENTITY_ORCHESTRATOR_API_KEY" envDefault:"the-orchestrator-api-key"`
+}
+
+type CheckoutsColleagueDiscountConfig struct {
+	Scheme string `env:"CHECKOUTS_COLLEAGUE_DISCOUNT_SCHEME" envDefault:"http"`
+	Host   string `env:"CHECKOUTS_COLLEAGUE_DISCOUNT_HOST" envDefault:"sainsburys-colleague-discount-mock-server.app.internal"`
 }
 
 type LoggerConfig struct {

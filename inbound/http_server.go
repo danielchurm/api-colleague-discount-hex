@@ -10,7 +10,6 @@ import (
 	log "github.com/JSainsburyPLC/go-logrus-wrapper"
 	"github.com/JSainsburyPLC/go-logrus-wrapper/middleware"
 	nrw "github.com/JSainsburyPLC/go-newrelic-wrapper"
-	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/config"
 	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/domain"
 	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/inbound/http_handlers"
 	accesslogger "github.com/JSainsburyPLC/smartshop-go-access-logger"
@@ -22,19 +21,33 @@ const (
 )
 
 type Server struct {
-	Config            config.AppConfig
+	Port              string
+	LogHttpBodies     bool
 	ApiProblemFactory apiproblem.Factory
 	DiscountCard      domain.DiscountCardRetriever
+}
+
+func NewServer(port string,
+	logHttpBodies bool,
+	apiProblemFactory apiproblem.Factory,
+	discountCard domain.DiscountCardRetriever,
+) Server {
+	return Server{
+		Port:              port,
+		LogHttpBodies:     logHttpBodies,
+		ApiProblemFactory: apiProblemFactory,
+		DiscountCard:      discountCard,
+	}
 }
 
 func (s Server) ListenAndServe() error {
 	const forDockerUseGlobalIP = "0.0.0.0"
 
-	log.Infof("app is running on IP %s, port %s", forDockerUseGlobalIP, s.Config.Port)
+	log.Infof("app is running on IP %s, port %s", forDockerUseGlobalIP, s.Port)
 
-	handler := s.createRouter(s.Config.Logger.LogHttpBodies)
+	handler := s.createRouter(s.LogHttpBodies)
 	srv := http.Server{
-		Addr:         fmt.Sprintf("%s:%s", forDockerUseGlobalIP, s.Config.Port),
+		Addr:         fmt.Sprintf("%s:%s", forDockerUseGlobalIP, s.Port),
 		Handler:      handler,
 		IdleTimeout:  65 * time.Second,
 		ReadTimeout:  5 * time.Second,

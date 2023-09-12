@@ -4,10 +4,10 @@ import (
 	apiproblem "github.com/JSainsburyPLC/go-api-problem"
 	log "github.com/JSainsburyPLC/go-logrus-wrapper"
 	nrw "github.com/JSainsburyPLC/go-newrelic-wrapper"
-	"github.com/go-chi/chi/v5"
-
-	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/app"
 	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/config"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/domain"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/inbound"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/outbound"
 	//TODO Uncomment if you have a database "github.com/JSainsburyPLC/smartshop-api-colleague-discount/db"
 )
 
@@ -25,11 +25,29 @@ func main() {
 
 	enableNewRelic(err, cfg)
 
-	apiProblemFactory := apiproblem.NewFactory(errorType)
-	a := app.NewApplication(chi.NewRouter(), apiProblemFactory)
+	// Outbound adapters
+	httpClient := nrw.NewHttpClient()
+	identityOrchestratorClient := outbound.NewIdentityOrchestratorClient(
+		cfg.IdentityOrchestratorConfig.Host,
+		cfg.IdentityOrchestratorConfig.ApiKey,
+		httpClient,
+	)
+	checkoutsColleagueDiscountClient := outbound.NewCheckoutsColleagueDiscountClient(
+		cfg.CheckoutsColleagueDiscountConfig.Scheme,
+		cfg.CheckoutsColleagueDiscountConfig.Host,
+		httpClient,
+	)
 
-	a.Init()
-	a.Run(cfg.Port, cfg.Logger.LogHttpBodies)
+	// Domain
+	discountCard := domain.NewDiscountCard(identityOrchestratorClient, checkoutsColleagueDiscountClient)
+
+	// Inbound adapters
+	apiProblemFactory := apiproblem.NewFactory(errorType)
+	server := inbound.NewServer(cfg.Port, cfg.Logger.LogHttpBodies, apiProblemFactory, discountCard)
+	err = server.ListenAndServe()
+	if err != nil {
+		log.Errorf("server exited with error %+v", err)
+	}
 }
 
 func enableNewRelic(err error, cfg config.AppConfig) {

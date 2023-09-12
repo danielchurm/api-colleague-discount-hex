@@ -20,8 +20,9 @@ var _ = Describe("checkouts colleague discount client", func() {
 		ctrl           *gomock.Controller
 		mockHttpClient *mock_outbound.MockHttpClient
 
-		host  = "checkouts-colleague-discount.int.stg.jspaas.uk"
-		email = "user123@example.com"
+		host   = "checkouts-colleague-discount.int.stg.jspaas.uk"
+		scheme = "https"
+		email  = "user123@example.com"
 
 		ctx context.Context
 	)
@@ -50,14 +51,15 @@ var _ = Describe("checkouts colleague discount client", func() {
 		responseRecorder.Body = bytes.NewBufferString(respBody)
 		resp := responseRecorder.Result()
 		reqMatcher := checkoutsDiscountReqMatcher{
-			host:  host,
-			email: email,
+			scheme: scheme,
+			host:   host,
+			email:  email,
 		}
 		mockHttpClient.EXPECT().
 			Do(reqMatcher).
 			Return(resp, nil)
 
-		client := outbound.NewCheckoutsColleagueDiscountClient(host, mockHttpClient)
+		client := outbound.NewCheckoutsColleagueDiscountClient(scheme, host, mockHttpClient)
 		card, err := client.GetDiscountCard(ctx, email)
 
 		Expect(err).ToNot(HaveOccurred())
@@ -67,15 +69,16 @@ var _ = Describe("checkouts colleague discount client", func() {
 })
 
 type checkoutsDiscountReqMatcher struct {
-	host  string
-	email string
+	scheme string
+	host   string
+	email  string
 }
 
 func (c checkoutsDiscountReqMatcher) Matches(x interface{}) bool {
 	actualRequest := x.(*http.Request)
 	methodMatch := Expect(actualRequest.Method).To(Equal(http.MethodGet))
 
-	expectedUrl := fmt.Sprintf("https://%s/discount-card?email=%s", c.host, c.email)
+	expectedUrl := fmt.Sprintf("%s://%s/discount-card?email=%s", c.scheme, c.host, c.email)
 	urlMatch := Expect(actualRequest.URL.String()).To(Equal(expectedUrl))
 
 	return methodMatch && urlMatch

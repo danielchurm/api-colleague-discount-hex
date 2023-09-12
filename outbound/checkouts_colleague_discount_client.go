@@ -16,19 +16,21 @@ type colleagueDiscountRespBody struct {
 }
 
 type CheckoutsColleagueDiscountClient struct {
+	scheme     string
 	host       string
 	httpClient HttpClient
 }
 
-func NewCheckoutsColleagueDiscountClient(host string, httpClient HttpClient) CheckoutsColleagueDiscountClient {
+func NewCheckoutsColleagueDiscountClient(scheme, host string, httpClient HttpClient) CheckoutsColleagueDiscountClient {
 	return CheckoutsColleagueDiscountClient{
+		scheme:     scheme,
 		host:       host,
 		httpClient: httpClient,
 	}
 }
 
 func (c CheckoutsColleagueDiscountClient) GetDiscountCard(ctx context.Context, email string) (domain.Card, error) {
-	url := fmt.Sprintf("https://%s/discount-card?email=%s", c.host, email)
+	url := fmt.Sprintf("%s://%s/discount-card?email=%s", c.scheme, c.host, email)
 
 	request, _ := http.NewRequest(http.MethodGet, url, nil)
 	response, _ := c.httpClient.Do(request)

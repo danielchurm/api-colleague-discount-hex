@@ -42,10 +42,20 @@ var _ = Describe("Get Card", func() {
 })
 
 func mockSetupCardForUser(userId, email, cardNumber, issueNumber, status string) {
+	Expect(mockIdentityOrchestrator.ResetAllSessionsAndMocks()).To(Succeed())
+	Expect(mockSainsColleagueDiscount.ResetAllSessionsAndMocks()).To(Succeed())
+
 	ioReq := mock.NewRequestBuilder(http.MethodGet, "/api/v1/users/"+userId).
-		AddHeader("X-API-KEY", "the-orchestrator-api-key").
+		AddHeader("X-Api-Key", "the-orchestrator-api-key").
 		Build()
-	ioRespJson := "{\"email\": \"" + email + "\",\"identity_uuid\": \"some-1-identity-uuid\", \"id\": 8, \"nectar_card\": \"24871760811\", \"terms_accepted\": \"2015-03-27T14:03:26+00:00\", \"registration_date\": \"2015-03-27T14:03:26+00:00\"}"
+	ioRespJson := `{
+		"email": "` + email + `",
+		"identity_uuid": "some-1-identity-uuid",
+		"id": 8,
+		"nectar_card": "24871760811",
+		"terms_accepted": "2015-03-27T14:03:26+00:00",
+		"registration_date": "2015-03-27T14:03:26+00:00"
+	}`
 	ioResp := mock.NewResponseBuilder(http.StatusOK).AddBody(ioRespJson).Build()
 	ioMockDef := mock.NewDefinition(ioReq, ioResp)
 
@@ -54,12 +64,7 @@ func mockSetupCardForUser(userId, email, cardNumber, issueNumber, status string)
 	scdreq := mock.NewRequestBuilder(http.MethodGet, "/discount-card").
 		AddQueryParam("email", email).
 		Build()
-	scdRespJson := `{
-		"cardNumber": "` + cardNumber + `",
-		"discountPercentage": 15",
-		"issueNumber": ` + issueNumber + `,
-		"status": "` + status + `"
-	}`
+	scdRespJson := `{"cardNumber": "` + cardNumber + `","discountPercentage": 15,"issueNumber": ` + issueNumber + `,"status": "` + status + `"}`
 	scdResp := mock.NewResponseBuilder(http.StatusOK).AddBody(scdRespJson).Build()
 	scdMockDef := mock.NewDefinition(scdreq, scdResp)
 
