@@ -6,8 +6,8 @@ import (
 	"net/http/httptest"
 
 	apiproblem "github.com/JSainsburyPLC/go-api-problem"
+	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/inbound/http_handlers"
 
-	"github.com/JSainsburyPLC/smartshop-api-colleague-discount/handlers"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
@@ -20,7 +20,7 @@ var _ = Describe("Not Found handler", func() {
 			resp := httptest.NewRecorder()
 			req := httptest.NewRequest(http.MethodGet, "/roswell/alien", nil)
 
-			h := handlers.NewNotFound(apiproblem.NewFactory("http://error.type/"))
+			h := http_handlers.NewNotFound(apiproblem.NewFactory("http://error.type/"))
 			h.ServeHTTP(resp, req)
 
 			By("Having HTTP Status OK", func() {
